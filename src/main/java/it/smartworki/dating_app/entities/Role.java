@@ -1,0 +1,32 @@
+package it.smartworki.dating_app.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import it.smartworki.dating_app.entities.enums.RoleType;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "roles")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "type")
+    private RoleType type;
+
+    // --------- Relazioni ----------
+
+    // User 1:1
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("role")
+    private User user;
+}
