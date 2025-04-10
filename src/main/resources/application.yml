@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: dating_app
+  datasource:
+    url: jdbc:mysql://localhost:3306/dating_app?serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  security:
+    jwt:
+      secret-key: this-is-a-secret-key
+  server:
+    port: 8080
