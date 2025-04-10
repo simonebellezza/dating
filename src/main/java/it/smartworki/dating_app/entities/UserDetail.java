@@ -30,7 +30,7 @@ public class UserDetail {
 
     // User 1:1
     @OneToOne
-    @MapsId
+    @MapsId  // Mappa l'id di User come id di UserDetail
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnoreProperties("userDetail")
     private User user;

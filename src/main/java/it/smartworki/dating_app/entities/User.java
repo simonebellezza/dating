@@ -66,6 +66,8 @@ public class User {
     private List<Match> matchesAsTarget;
 
     // Interest 1:N
+
+
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
     private Set<Interest> interests;
