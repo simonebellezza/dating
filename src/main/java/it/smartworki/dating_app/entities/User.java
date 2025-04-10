@@ -65,12 +65,10 @@ public class User {
     @JsonIgnoreProperties("userTarget")
     private List<Match> matchesAsTarget;
 
-    // Interest 1:N
-
-
+    // InterestUser 1:N
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
-    private Set<Interest> interests;
+    private Set<InterestUser> interests;
 
     // Genre 1:N
     @OneToMany(mappedBy = "user")
