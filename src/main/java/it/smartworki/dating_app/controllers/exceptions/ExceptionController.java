@@ -1,6 +1,7 @@
 package it.smartworki.dating_app.controllers.exceptions;
 
 import it.smartworki.dating_app.exceptions.ApiException;
+import it.smartworki.dating_app.exceptions.UserAlreadyExistsException;
 import it.smartworki.dating_app.exceptions.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,23 @@ public class ExceptionController {
         apiException.setPath(request.getMethod() + " " + request.getRequestURI());  // Es. "GET /api/users/{id}"
 
         return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
+    }
+
+    // AlreadyExistsException
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ApiException> alreadyExistsExceptionHandler(
+            RuntimeException e,
+            HttpServletRequest request
+    ) {
+        ApiException apiException = new ApiException();
+
+        apiException.setStatus(HttpStatus.CONFLICT.value());  // 409
+        apiException.setError(HttpStatus.CONFLICT.getReasonPhrase());  // "Conflict"
+        apiException.setMessage(e.getMessage());
+        apiException.setTimestamp(LocalDateTime.now());
+        apiException.setPath(request.getMethod() + " " + request.getRequestURI());
+
+        return new ResponseEntity<>(apiException, HttpStatus.CONFLICT);
     }
 
     // Exception generica
