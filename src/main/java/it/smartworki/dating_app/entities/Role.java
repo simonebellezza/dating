@@ -20,7 +20,7 @@ public class Role {
 
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private RoleType type = RoleType.ROLE_USER;
+    private RoleType type = RoleType.USER;
 
     // --------- Relazioni ----------
 

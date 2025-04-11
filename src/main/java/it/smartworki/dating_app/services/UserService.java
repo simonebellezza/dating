@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -33,5 +32,16 @@ public class UserService {
     // save
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    // updateById
+
+    // deleteById
+    public User deleteById(Long id) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        userRepository.deleteById(id);
+        return existingUser;
     }
 }
