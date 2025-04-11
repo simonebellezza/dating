@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "genres")
 @NoArgsConstructor
@@ -23,9 +25,8 @@ public class Genre {
 
     // ---------- Relazioni ----------
 
-    // User N:1
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("genres")
-    private User user;
+    // GenreUser 1:N
+    @OneToMany(mappedBy = "genre")
+    @JsonIgnoreProperties("genre")
+    private Set<GenreUser> users;
 }

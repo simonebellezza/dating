@@ -15,11 +15,7 @@ import lombok.Setter;
 @Setter
 public class Preference {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "pref_genre")
-    private Genre prefGenre;
 
     @Column(name = "min_age")
     private Integer minAge;
@@ -27,13 +23,14 @@ public class Preference {
     @Column(name = "max_age")
     private Integer maxAge;
 
-    @Column(name = "max_distance")
-    private Long maxDistance;
+    @Column(name = "distance")
+    private Long distance;
 
     // --------- Relazioni ----------
 
     // User 1:1
     @OneToOne
+    @MapsId
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnoreProperties("preference")
     private User user;

@@ -70,10 +70,10 @@ public class User {
     @JsonIgnoreProperties("user")
     private Set<InterestUser> interests;
 
-    // Genre 1:N
+    // GenreUser 1:N
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
-    private Set<Genre> genres;
+    private Set<GenreUser> genres;
 
     // Role 1:1
     @OneToOne(mappedBy = "user")

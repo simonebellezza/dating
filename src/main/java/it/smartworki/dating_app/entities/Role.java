@@ -16,7 +16,6 @@ import lombok.Setter;
 @Setter
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type")
@@ -26,6 +25,7 @@ public class Role {
 
     // User 1:1
     @OneToOne
+    @MapsId
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnoreProperties("role")
     private User user;

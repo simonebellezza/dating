@@ -1,7 +1,6 @@
 package it.smartworki.dating_app.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import it.smartworki.dating_app.entities.enums.Type;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

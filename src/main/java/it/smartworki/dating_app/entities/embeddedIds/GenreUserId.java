@@ -1,4 +1,4 @@
-package it.smartworki.dating_app.entities;
+package it.smartworki.dating_app.entities.embeddedIds;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class InterestUserId implements Serializable {
+public class GenreUserId implements Serializable {
     private Long userId;
-    private Long interestId;
+    private Long genreId;
 }

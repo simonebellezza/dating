@@ -1,7 +1,7 @@
 package it.smartworki.dating_app.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import it.smartworki.dating_app.entities.embeddedIds.InterestUserId;
+import it.smartworki.dating_app.entities.embeddedIds.GenreUserId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,24 +9,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "interest_user")
+@Table(name = "genre_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class InterestUser {
+public class GenreUser {
     @EmbeddedId
-    private InterestUserId id;
+    private GenreUserId id;
 
     @ManyToOne
-    @MapsId("userId")  // Mappa userId di InterestUserId
+    @MapsId("userId")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("interests")
+    @JsonIgnoreProperties("genres")
     private User user;
 
     @ManyToOne
-    @MapsId("interestId")  // Mappa interestId di InterestUserId
-    @JoinColumn(name = "interest_id", referencedColumnName = "id")
+    @MapsId("genreId")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     @JsonIgnoreProperties("users")
-    private Interest interest;
+    private Genre genre;
 }
