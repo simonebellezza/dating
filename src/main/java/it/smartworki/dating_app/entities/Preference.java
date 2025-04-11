@@ -2,13 +2,14 @@ package it.smartworki.dating_app.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.*;
+import org.hibernate.annotations.Check;
 
 @Entity
 @Table(name = "preferences")
+@Check(constraints = "max_age > min_age")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,14 +18,20 @@ public class Preference {
     @Id
     private Long id;
 
-    @Column(name = "min_age")
+    @Column(name = "min_age", nullable = false)
+    @Min(18)
+    @Max(150)
     private Integer minAge;
 
-    @Column(name = "max_age")
+    @Column(name = "max_age", nullable = false)
+    @Min(18)
+    @Max(150)
     private Integer maxAge;
 
-    @Column(name = "distance")
-    private Long distance;
+    @Column(name = "distance", nullable = false)
+    @Min(1)
+    @Max(500)
+    private Long distance = 50l;
 
     // --------- Relazioni ----------
 

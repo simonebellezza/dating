@@ -20,13 +20,13 @@ public class InterestUser {
 
     @ManyToOne
     @MapsId("userId")  // Mappa userId di InterestUserId
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties("interests")
     private User user;
 
     @ManyToOne
     @MapsId("interestId")  // Mappa interestId di InterestUserId
-    @JoinColumn(name = "interest_id", referencedColumnName = "id")
+    @JoinColumn(name = "interest_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties("users")
     private Interest interest;
 }

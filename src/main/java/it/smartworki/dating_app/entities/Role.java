@@ -18,8 +18,9 @@ public class Role {
     @Id
     private Long id;
 
-    @Column(name = "type")
-    private RoleType type;
+    @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RoleType type = RoleType.ROLE_USER;
 
     // --------- Relazioni ----------
 

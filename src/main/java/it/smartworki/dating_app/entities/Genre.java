@@ -20,7 +20,7 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false, unique = true)
     private String type;
 
     // ---------- Relazioni ----------

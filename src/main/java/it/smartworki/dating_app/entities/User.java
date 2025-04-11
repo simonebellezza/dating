@@ -23,26 +23,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "birthday")
+    @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
     @Column(name = "bio")
     private String bio;
 
-    @Column(name = "account_type")
-    private AccountType accountType;
+    @Column(name = "account_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType = AccountType.STANDARD;
 
     @Column(name = "registration_date")
-    private LocalDate registrationDate;
+    private LocalDate registrationDate = LocalDate.now();
 
     // ---------- Relazioni ----------
 
@@ -55,15 +56,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     @JsonIgnoreProperties("user")
     private UserDetail userDetail;
-
-    // (Doppia) Match 1:N, 1:N
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
-    private List<Match> matchesAsUser;
-
-    @OneToMany(mappedBy = "userTarget")
-    @JsonIgnoreProperties("userTarget")
-    private List<Match> matchesAsTarget;
 
     // InterestUser 1:N
     @OneToMany(mappedBy = "user")

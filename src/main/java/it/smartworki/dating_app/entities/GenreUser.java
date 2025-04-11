@@ -20,13 +20,13 @@ public class GenreUser {
 
     @ManyToOne
     @MapsId("userId")
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties("genres")
     private User user;
 
     @ManyToOne
     @MapsId("genreId")
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties("users")
     private Genre genre;
 }

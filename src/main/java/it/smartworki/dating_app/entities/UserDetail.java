@@ -23,8 +23,9 @@ public class UserDetail {
     @Column(name = "last_online")
     private LocalDateTime lastOnline;
 
-    @Column(name = "status")
-    private Status status;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.OFFLINE;
 
     // ---------- Relazioni ----------
 
