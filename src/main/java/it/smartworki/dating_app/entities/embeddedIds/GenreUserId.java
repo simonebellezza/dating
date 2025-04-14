@@ -13,5 +13,5 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class GenreUserId implements Serializable {
     private Long userId;
-    private Long genreId;
+    private Short genreId;
 }

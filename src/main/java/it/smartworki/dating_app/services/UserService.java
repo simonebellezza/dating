@@ -1,13 +1,16 @@
 package it.smartworki.dating_app.services;
 
+import it.smartworki.dating_app.dtos.UserDTO;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.exceptions.UserAlreadyExistsException;
 import it.smartworki.dating_app.exceptions.UserNotFoundException;
+import it.smartworki.dating_app.mappers.UserMapper;
 import it.smartworki.dating_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -15,36 +18,30 @@ public class UserService {
     private UserRepository userRepository;
 
     // findAll
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(UserMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     // findById
-    public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    // findByEmail
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(email));
-    }
-
-    // existsByEmail
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
+    public UserDTO findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return UserMapper.toDTO(user);
     }
 
     // save
-    public User save(User user) {
+    public UserDTO save(User user) {
         // Verifica che la email non esista già
         if(userRepository.existsByEmail(user.getEmail()))
             throw new UserAlreadyExistsException(user.getEmail());
 
-        return userRepository.save(user);
+        userRepository.save(user);
+        return UserMapper.toDTO(user);
     }
 
     // updateById
-    public User updateById(Long id, User user) {
+    public UserDTO updateById(Long id, User user) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
@@ -76,15 +73,8 @@ public class UserService {
         if(user.getRegistrationDate() != null)
             existingUser.setRegistrationDate(user.getRegistrationDate());
 
-        return userRepository.save(existingUser);
-    }
+        userRepository.save(existingUser);
 
-    // deleteById
-    public User deleteById(Long id) {
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-
-        userRepository.deleteById(id);
-        return existingUser;
+        return UserMapper.toDTO(existingUser);
     }
 }

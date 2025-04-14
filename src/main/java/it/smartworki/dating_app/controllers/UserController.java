@@ -1,5 +1,7 @@
 package it.smartworki.dating_app.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import it.smartworki.dating_app.dtos.UserDTO;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +16,23 @@ public class UserController {
     private UserService userService;
 
     // findAll
+    @Operation(summary = "Find all users")
     @GetMapping("/")
-    public List<User> findAll() {
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
     // findById
-    @GetMapping("/id/{id}")
-    public User findById(@PathVariable("id") Long id) {
+    @Operation(summary = "Find user by ID")
+    @GetMapping("/{id}")
+    public UserDTO findById(@PathVariable("id") Long id) {
         return userService.findById(id);
     }
 
-    // findByEmail
-    @GetMapping("/email/{email}")
-    public User findByEmail(@PathVariable("email") String email) {
-        return userService.findByEmail(email);
-    }
-
-    // existsByUser
-    @GetMapping("/exists")
-    public boolean existsByEmail(@RequestParam String email) {
-        return userService.existsByEmail(email);
-    }
-
     // updateById
+    @Operation(summary = "Update user by ID")
     @PutMapping("/{id}")
-    public User updateById(@PathVariable("id") Long id, @RequestBody User user) {
+    public UserDTO updateById(@PathVariable("id") Long id, @RequestBody User user) {
         return userService.updateById(id, user);
     }
 }

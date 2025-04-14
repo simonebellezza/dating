@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.lang.invoke.SwitchPoint;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -70,4 +71,22 @@ public class User {
     @OneToOne(mappedBy = "user")
     @JsonIgnoreProperties("user")
     private Role role;
+
+    // (Doppia) Swipe N:1
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Set<Swipe> swipes;
+
+    @OneToMany(mappedBy = "userTarget")
+    @JsonIgnoreProperties("userTarget")
+    private Set<Swipe> swipesAsTarget;
+
+    // (Doppia) Match 1:N
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Set<Match> matches;
+
+    @OneToMany(mappedBy = "userTarget")
+    @JsonIgnoreProperties("userTarget")
+    private Set<Match> matchesAsTarget;
 }
