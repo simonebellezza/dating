@@ -1,17 +1,10 @@
 package it.smartworki.dating_app.entities;
-import it.smartworki.dating_app.entities.enums.RoleType;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.smartworki.dating_app.entities.enums.AccountType;
-import it.smartworki.dating_app.entities.enums.RoleType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.lang.invoke.SwitchPoint;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -22,14 +15,15 @@ import java.util.Set;
 @Getter
 @Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
     @Column(name = "password", nullable = false, length = 255)
@@ -38,11 +32,11 @@ public class User {
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name = "bio", length = 1000)
+    @Column(name = "bio", length = 255)
     private String bio;
 
-    @Column(name = "account_type", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "account_type", nullable = false)
     private AccountType accountType = AccountType.STANDARD;
 
     @Column(name = "registration_date")
@@ -50,57 +44,46 @@ public class User {
 
     // ---------- Relazioni ----------
 
-    // Preference 1:1
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private Preference preference;
 
-    // UserDetail 1:1
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private UserDetail userDetail;
 
-    // InterestUser 1:N
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
-    private Set<InterestUser> interests;
-
-    // GenreUser 1:N
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
-    private Set<GenreUser> genres;
-
-    // Role 1:1
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private Role role;
 
-    // (Doppia) Swipe N:1
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
-    private Set<Swipe> swipes;
+    private Set<InterestUser> interests;
 
-    @OneToMany(mappedBy = "userTarget")
-    @JsonIgnoreProperties("userTarget")
-    private Set<Swipe> swipesAsTarget;
-
-    // (Doppia) Match 1:N
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
-    private Set<Match> matches;
+    private Set<GenreUser> genres;
 
-    @OneToMany(mappedBy = "userTarget")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private Set<Swipe> swipesSent;
+
+    @OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("userTarget")
-    private Set<Match> matchesAsTarget;
-    
-    
-    
+    private Set<Swipe> swipesReceived;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private Set<Match> matchesInitiated;
+
+    @OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("userTarget")
+    private Set<Match> matchesReceived;
+
     public User(String name, String email, String password, LocalDate birthday) {
-    	this.name = name;
-		this.email = email;
-		this.password = password;
-		this.birthday = birthday;
-	    this.role = role;
-
-	}
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+    }
 }

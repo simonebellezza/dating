@@ -1,6 +1,7 @@
 package it.smartworki.dating_app.exceptions;
 
-import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-@Log
 public class GlobalValidationHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalValidationHandler.class);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -23,7 +25,7 @@ public class GlobalValidationHandler {
             errors.put(fieldName, errorMessage);
         });
 
-        // Creare un log di eccezioni backend
+        logger.warn("Errore di validazione: {}", errors);
 
         return errors;
     }

@@ -3,10 +3,7 @@ package it.smartworki.dating_app.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.smartworki.dating_app.entities.enums.SwipeType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -17,28 +14,25 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Swipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private SwipeType type;
 
-    @Column(name = "timestamp")
-    private LocalDateTime timestamp;
+    @Column(name = "timestamp", nullable = false)
+    private LocalDateTime timestamp = LocalDateTime.now();
 
-    // ---------- Relazioni ----------
-
-    // (Doppia) User N:1
-    // User che ha fatto lo swipe
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("swipes")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"swipesSent", "swipesReceived", "matchesInitiated", "matchesReceived"})
     private User user;
 
-    // User che ha subito lo swipe
-    @ManyToOne
-    @JoinColumn(name = "user_target_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("swipesAsTarget")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_target_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"swipesSent", "swipesReceived", "matchesInitiated", "matchesReceived"})
     private User userTarget;
 }

@@ -17,42 +17,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // findAll
     @Operation(summary = "Find all users")
     @GetMapping("/")
     public List<UserResponseDTO> findAll() {
         return userService.findAll();
     }
 
-    // findById
     @Operation(summary = "Find user by ID")
     @GetMapping("/{id}")
     public UserResponseDTO findById(@PathVariable("id") Long id) {
         return userService.findById(id);
     }
 
-    // saveAll
     @Operation(summary = "Save all users")
     @PostMapping("/all")
     public List<UserResponseDTO> saveAll(@RequestBody @Valid List<UserRequestDTO> users) {
         return userService.saveAll(users);
     }
 
-    // save
     @Operation(summary = "Save user")
     @PostMapping("/")
     public UserResponseDTO save(@RequestBody @Valid UserRequestDTO user) {
         return userService.save(user);
     }
 
-    // updateById
     @Operation(summary = "Update user by ID")
     @PutMapping("/{id}")
     public UserResponseDTO updateById(@PathVariable("id") Long id, @RequestBody @Valid UserRequestDTO user) {
         return userService.updateById(id, user);
     }
 
-    // deleteById
     @Operation(summary = "Delete user by ID")
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") Long id) {
