@@ -3,7 +3,7 @@ package it.smartworki.dating_app.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import it.smartworki.dating_app.security.exception.MyAPIException;
+import it.smartworki.dating_app.exceptions.MyAPIException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

@@ -52,10 +52,10 @@ public class UserController {
         return userService.updateById(id, user);
     }
 
-    // deleteAll
-    @Operation(summary = "Delete all users")
-    @DeleteMapping("/all")
-    public void deleteAll() {
-        userService.deleteAll();
+    // deleteById
+    @Operation(summary = "Delete user by ID")
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        userService.delete(id);
     }
 }

@@ -1,0 +1,7 @@
+- NO autentication
+http://localhost:8080/swagger-ui/index.html
+
+- Register
+
+- Login
+

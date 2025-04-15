@@ -8,10 +8,9 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class AuthResponse {
 	
-	private String token; // Token JWT generato
+	private String token;
     private String email;
     private String tokenType = "Bearer";
 }

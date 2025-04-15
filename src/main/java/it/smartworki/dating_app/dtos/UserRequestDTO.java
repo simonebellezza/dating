@@ -15,22 +15,22 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UserRequestDTO {
-    @NotBlank(message = "Name must be not null")
+
+    @NotBlank(message = "Il nome è obbligatorio")
     private String name;
 
-    @NotBlank(message = "Email must be not null")
-    @Email(message = "Email must be valid")
+    @NotBlank(message = "L'email è obbligatoria")
+    @Email(message = "Email non valida")
     private String email;
 
-    @NotBlank(message = "Password must be not null")
-    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
+    @NotBlank(message = "La password è obbligatoria")
+    @Size(min = 8, max = 255, message = "La password deve essere tra 8 e 255 caratteri")
     private String password;
 
-    @NotNull
-    @Past(message = "Birthday must be in the past")
-    @Adult
+    @NotNull(message = "La data di nascita è obbligatoria")
+    @Past(message = "La data di nascita deve essere nel passato")
     private LocalDate birthday;
 
-    @Size(max = 1000, message = "Bio must be max 1000 characters")
+    @Size(max = 1000, message = "La bio può contenere al massimo 1000 caratteri")
     private String bio;
 }

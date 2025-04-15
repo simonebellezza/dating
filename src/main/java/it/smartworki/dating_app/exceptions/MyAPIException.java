@@ -1,4 +1,4 @@
-package it.smartworki.dating_app.security.exception;
+package it.smartworki.dating_app.exceptions;
 
 
 import org.springframework.http.HttpStatus;

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,19 +59,20 @@ public class UserService {
     }
 
     // save
-    public UserResponseDTO save(UserRequestDTO user) {
-        // Verifica che la email non esista già
-        if(userRepository.existsByEmail(user.getEmail()))
-            throw new UserAlreadyExistsException(user.getEmail());
+    public UserResponseDTO save(UserRequestDTO userRequestDTO) {
+        if (userRepository.existsByEmail(userRequestDTO.getEmail()))
+            throw new UserAlreadyExistsException(userRequestDTO.getEmail());
 
-        User newUser = UserMapper.toEntity(user);
+        User user = UserMapper.toEntity(userRequestDTO);
 
-        // Hash della password
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        // Codifica della password
+        user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
 
-        userRepository.save(newUser);
+        user.setRegistrationDate(LocalDate.now());
 
-        return UserMapper.toDTO(newUser);
+        userRepository.save(user);
+
+        return UserMapper.toDTO(user);
     }
 
     // updateById
@@ -90,9 +92,10 @@ public class UserService {
             existingUser.setEmail(user.getEmail());
         }
 
-        if(!user.getPassword().equals(existingUser.getPassword()))
-            // Hash della password
-            existingUser.setPassword(user.getPassword());
+        // Se viene passata una nuova password, la codifico e la setto
+        if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
 
         if(!user.getBirthday().equals(existingUser.getBirthday()))
             existingUser.setBirthday(user.getBirthday());
@@ -105,8 +108,12 @@ public class UserService {
         return UserMapper.toDTO(existingUser);
     }
 
-    // deleteAll
-    public void deleteAll() {
-        userRepository.deleteAll();
+    // delete
+    public void delete(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
+        userRepository.deleteById(id);
     }
+
 }
