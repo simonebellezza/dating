@@ -1,7 +1,10 @@
 package it.smartworki.dating_app.entities;
+import it.smartworki.dating_app.entities.enums.RoleType;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.smartworki.dating_app.entities.enums.AccountType;
+import it.smartworki.dating_app.entities.enums.RoleType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -89,4 +92,15 @@ public class User {
     @OneToMany(mappedBy = "userTarget")
     @JsonIgnoreProperties("userTarget")
     private Set<Match> matchesAsTarget;
+    
+    
+    
+    public User(String name, String email, String password, LocalDate birthday) {
+    	this.name = name;
+		this.email = email;
+		this.password = password;
+		this.birthday = birthday;
+	    this.role = role;
+
+	}
 }
