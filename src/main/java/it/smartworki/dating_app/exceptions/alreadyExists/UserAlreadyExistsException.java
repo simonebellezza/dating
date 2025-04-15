@@ -1,4 +1,6 @@
-package it.smartworki.dating_app.exceptions;
+package it.smartworki.dating_app.exceptions.alreadyExists;
+
+import java.util.List;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException() {
@@ -11,5 +13,9 @@ public class UserAlreadyExistsException extends RuntimeException {
 
     public UserAlreadyExistsException(String email) {
         super(String.format("Utente con email %s già esistente", email));
+    }
+
+    public UserAlreadyExistsException(List<String> emails) {
+        super(String.format("Utenti con email %s già esistenti", String.join(", ", emails)));
     }
 }

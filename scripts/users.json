@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Mario Rossi",
+    "email": "mario.rossi@example.com",
+    "password": "password123",
+    "birthday": "1990-05-15"
+  },
+  {
+    "name": "Luisa Bianchi",
+    "email": "luisa.bianchi@example.com",
+    "password": "securePass456",
+    "birthday": "1985-08-22"
+  },
+  {
+    "name": "Giovanni Verdi",
+    "email": "giovanni.verdi@example.com",
+    "password": "myPassword789",
+    "birthday": "1992-11-30"
+  },
+  {
+    "name": "Anna Neri",
+    "email": "anna.neri@example.com",
+    "password": "passWord321",
+    "birthday": "1995-03-10"
+  },
+  {
+    "name": "Paolo Gialli",
+    "email": "paolo.gialli@example.com",
+    "password": "yellowPass654",
+    "birthday": "1988-07-25"
+  }
+]

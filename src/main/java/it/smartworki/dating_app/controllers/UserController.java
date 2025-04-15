@@ -1,9 +1,11 @@
 package it.smartworki.dating_app.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import it.smartworki.dating_app.dtos.UserDTO;
+import it.smartworki.dating_app.dtos.UserRequestDTO;
+import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,21 +20,42 @@ public class UserController {
     // findAll
     @Operation(summary = "Find all users")
     @GetMapping("/")
-    public List<UserDTO> findAll() {
+    public List<UserResponseDTO> findAll() {
         return userService.findAll();
     }
 
     // findById
     @Operation(summary = "Find user by ID")
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable("id") Long id) {
+    public UserResponseDTO findById(@PathVariable("id") Long id) {
         return userService.findById(id);
+    }
+
+    // saveAll
+    @Operation(summary = "Save all users")
+    @PostMapping("/all")
+    public List<UserResponseDTO> saveAll(@RequestBody @Valid List<UserRequestDTO> users) {
+        return userService.saveAll(users);
+    }
+
+    // save
+    @Operation(summary = "Save user")
+    @PostMapping("/")
+    public UserResponseDTO save(@RequestBody @Valid UserRequestDTO user) {
+        return userService.save(user);
     }
 
     // updateById
     @Operation(summary = "Update user by ID")
     @PutMapping("/{id}")
-    public UserDTO updateById(@PathVariable("id") Long id, @RequestBody User user) {
+    public UserResponseDTO updateById(@PathVariable("id") Long id, @RequestBody @Valid UserRequestDTO user) {
         return userService.updateById(id, user);
+    }
+
+    // deleteAll
+    @Operation(summary = "Delete all users")
+    @DeleteMapping("/all")
+    public void deleteAll() {
+        userService.deleteAll();
     }
 }

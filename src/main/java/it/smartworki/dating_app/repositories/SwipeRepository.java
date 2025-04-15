@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SwipeRepository extends JpaRepository<Swipe, Long> {
+    // existsByUserIdAndUserTargetId
+    boolean existsByUserIdAndUserTargetId(Long userId, Long userTargetId);
 }

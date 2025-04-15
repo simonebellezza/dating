@@ -1,8 +1,8 @@
 package it.smartworki.dating_app.controllers.exceptions;
 
 import it.smartworki.dating_app.exceptions.ApiException;
-import it.smartworki.dating_app.exceptions.UserAlreadyExistsException;
-import it.smartworki.dating_app.exceptions.UserNotFoundException;
+import it.smartworki.dating_app.exceptions.alreadyExists.UserAlreadyExistsException;
+import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

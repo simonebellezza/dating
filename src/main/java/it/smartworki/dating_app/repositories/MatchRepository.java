@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
+    // existsByUserIdAndUserTargetId
+    boolean existsByUserIdAndUserTargetId(Long userId, Long userTargetId);
 }

@@ -29,13 +29,13 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
 
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name = "bio")
+    @Column(name = "bio", length = 1000)
     private String bio;
 
     @Column(name = "account_type", nullable = false)

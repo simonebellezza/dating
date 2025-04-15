@@ -1,4 +1,4 @@
-package it.smartworki.dating_app.exceptions;
+package it.smartworki.dating_app.exceptions.notFound;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException() {
