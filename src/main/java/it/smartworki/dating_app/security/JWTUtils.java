@@ -16,10 +16,10 @@ import java.util.Date;
 @Component
 public class JWTUtils {
 
-	@Value("${app.jwt-secret}")
+	@Value("${spring.security.jwt.secret-key}")
 	private String jwtSecret;
 
-	@Value("${app.jwt-expiration-milliseconds}")
+	@Value("${spring.security.jwt.expiration}")
 	private long jwtExpirationDate;
 
 	// generate JWT token
