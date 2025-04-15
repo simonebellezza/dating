@@ -39,7 +39,7 @@ public class AuthController {
             throw new IllegalArgumentException("L'utente esiste già!");
         }
         String hashedPwd = encoder.encode(request.getPassword());
-       User user = new User();
+        User user = new User();
         user.setEmail(request.getEmail());
         user.setName(request.getName());
         user.setPassword(hashedPwd);

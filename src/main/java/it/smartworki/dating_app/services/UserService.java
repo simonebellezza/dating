@@ -8,6 +8,7 @@ import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
 import it.smartworki.dating_app.mappers.UserMapper;
 import it.smartworki.dating_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // findAll
     public List<UserResponseDTO> findAll() {
@@ -61,6 +64,10 @@ public class UserService {
             throw new UserAlreadyExistsException(user.getEmail());
 
         User newUser = UserMapper.toEntity(user);
+
+        // Hash della password
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
         userRepository.save(newUser);
 
         return UserMapper.toDTO(newUser);

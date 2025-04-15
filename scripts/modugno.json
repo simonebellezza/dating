@@ -1,11 +1,11 @@
 {
   "id": 11,
   "name": "Francesco Rosario Antonio Modugno",
-  "password": "Buongiorno signor Maurizio, scusi il ritardo",
-  "email": "minchia.lunga@modugno.it",
+  "password": "Buongiorno scusi il ritardo",
+  "email": "francesco@modugno.it",
   "birthday": "1975-04-15",
-  "bio": "Sono ghei",
-  "accountType": "STANDARD",
+  "bio": "Sono un bodibilder",
+  "accountType": "PREMIUM",
   "registrationDate": "2025-04-15",
 
   "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJtaW5jaGlhLmx1bmdhQG1vZHVnbm8uaXQiLCJpYXQiOjE3NDQ3MDY4NDgsImV4cCI6MTc0NTMxMTY0OH0.5Vjb3cZTO6JXGHqnJpT4zeKYorOAPL-JLG2iKMBY0T46JukJCAOEUr5P7AH4mCWi"
