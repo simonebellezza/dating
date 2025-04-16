@@ -7,7 +7,10 @@ import it.smartworki.dating_app.exceptions.alreadyExists.UserAlreadyExistsExcept
 import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
 import it.smartworki.dating_app.mappers.UserMapper;
 import it.smartworki.dating_app.repositories.UserRepository;
+import it.smartworki.dating_app.security.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JWTUtils jwts;
+
     public List<UserResponseDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(UserMapper::toDTO)
@@ -33,6 +39,30 @@ public class UserService {
     public UserResponseDTO findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return UserMapper.toDTO(user);
+    }
+
+    public UserResponseDTO findMe(String token){
+        String email = jwts.getUsername(token);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));;
+                return UserMapper.toDTO(user);
+    }
+
+    public UserResponseDTO findByToken(String token, long id) {
+        User userFounded = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
+
+        String email = jwts.getUsername(token);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
+
+        if (user.getId() == id) {
+            // Restituisci l'utente autenticato per indicare che deve essere reindirizzato
+            return UserMapper.toDTO(user);
+        }
+
+        // Restituisci l'utente richiesto
+        return UserMapper.toDTO(userFounded);
     }
 
     public List<UserResponseDTO> saveAll(List<UserRequestDTO> users) {

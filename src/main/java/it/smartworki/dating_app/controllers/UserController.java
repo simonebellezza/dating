@@ -7,6 +7,9 @@ import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +19,31 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Operation(summary = "Find myself")
+    @GetMapping("/me")
+    public ResponseEntity<UserResponseDTO> findMe(@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.replace("Bearer ", "");
+        UserResponseDTO user = userService.findMe(token);
+        return ResponseEntity.ok(user);
+    }
+
+    @Operation(summary = "Find user by token or redirect to /me")
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> findByToken(@RequestHeader("Authorization") String authorizationHeader, @PathVariable long id) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        UserResponseDTO user = userService.findByToken(token, id);
+
+        // Se l'utente autenticato corrisponde all'utente richiesto, reindirizza a /me
+        if (user.getId() == id) {
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/api/users/me")
+                    .build();
+        }
+
+        // Altrimenti restituisci i dati dell'utente richiesto
+        return ResponseEntity.ok(user);
+    }
 
     @Operation(summary = "Find all users")
     @GetMapping("/")
