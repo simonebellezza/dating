@@ -1,6 +1,7 @@
 package it.smartworki.dating_app.mappers;
 
 import it.smartworki.dating_app.converters.DateConverter;
+import it.smartworki.dating_app.dtos.UserPreferenceResponseDTO;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
@@ -22,6 +23,10 @@ public class UserMapper {
         userDTO.setBio(user.getBio());
         userDTO.setAccountType(user.getAccountType());
         userDTO.setRegistrationDate(user.getRegistrationDate());
+        userDTO.setGenres(user.getGenres().stream().map(g ->
+                g.getGenre().getType()).toList());
+        userDTO.setAge(DateConverter.calculateAge(user.getBirthday()));
+        userDTO.setPreferences(PreferenceMapper.toDTO(user.getPreference()));
 
         return userDTO;
     }
@@ -34,7 +39,7 @@ public class UserMapper {
 
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());  // Hash password
+        user.setPassword(userRequestDTO.getPassword());
         user.setBirthday(userRequestDTO.getBirthday());
         user.setBio(userRequestDTO.getBio());
 

@@ -1,6 +1,7 @@
 package it.smartworki.dating_app.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
@@ -20,9 +21,7 @@ public class UserController {
 
     @Operation(summary = "Find all users")
     @GetMapping("/")
-    public List<UserResponseMinimalDTO> findAll() {
-        return userService.findAll();
-    }
+    public List<UserResponseMinimalDTO> findAll() { return userService.findAll(); }
 
     @Operation(summary = "Find user by ID")
     @GetMapping("/{id}")
