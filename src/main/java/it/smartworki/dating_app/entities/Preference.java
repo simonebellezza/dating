@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.hibernate.annotations.Check;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "preferences")
 @Check(constraints = "max_age > min_age")
@@ -41,4 +43,13 @@ public class Preference {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnoreProperties("preference")
     private User user;
+
+    // GenrePreference 1:N
+    @ManyToMany
+    @JoinTable(name = "genre_preference",
+            joinColumns = @JoinColumn(name = "genre_id"),
+            inverseJoinColumns = @JoinColumn(name = "preference_id")
+    )
+    @JsonIgnoreProperties("preference")
+    private Set<Genre> genres;
 }

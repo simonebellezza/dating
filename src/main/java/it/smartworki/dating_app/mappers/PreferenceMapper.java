@@ -14,6 +14,7 @@ public class PreferenceMapper {
         preferenceDTO.setMinAge(preference.getMinAge());
         preferenceDTO.setMaxAge(preference.getMaxAge());
         preferenceDTO.setDistance(preference.getDistance());
+        preferenceDTO.setGenres(preference.getGenres());
 
         return preferenceDTO;
     }
@@ -27,6 +28,7 @@ public class PreferenceMapper {
         preference.setMinAge(preferenceRequestDTO.getMinAge());
         preference.setMaxAge(preferenceRequestDTO.getMaxAge());
         preference.setDistance(preferenceRequestDTO.getDistance());
+        preference.setGenres(preferenceRequestDTO.getGenres());
 
         return preference;
     }

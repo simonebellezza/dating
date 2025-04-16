@@ -29,4 +29,9 @@ public class Genre {
     @OneToMany(mappedBy = "genre")
     @JsonIgnoreProperties("genre")
     private Set<GenreUser> users;
+
+    // GenrePreference 1:N
+    @ManyToMany(mappedBy = "genres")
+    @JsonIgnoreProperties("genres")
+    private Set<Preference> preferences;
 }
