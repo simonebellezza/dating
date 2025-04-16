@@ -1,12 +1,16 @@
 package it.smartworki.dating_app.mappers;
 
+import it.smartworki.dating_app.converters.DateConverter;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
+import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
 import it.smartworki.dating_app.entities.User;
+
+import java.time.LocalDate;
 
 public class UserMapper {
     public static UserResponseDTO toDTO(User user) {
-        if(user == null)
+        if (user == null)
             return null;
 
         UserResponseDTO userDTO = new UserResponseDTO();
@@ -23,7 +27,7 @@ public class UserMapper {
     }
 
     public static User toEntity(UserRequestDTO userRequestDTO) {
-        if(userRequestDTO == null)
+        if (userRequestDTO == null)
             return null;
 
         User user = new User();
@@ -35,5 +39,20 @@ public class UserMapper {
         user.setBio(userRequestDTO.getBio());
 
         return user;
+    }
+
+    public static UserResponseMinimalDTO toMinimalDTO(User user) {
+        if (user == null)
+            return null;
+
+        UserResponseMinimalDTO dto = new UserResponseMinimalDTO();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        // dto.setImagePath(user.getImagePath());
+        dto.setGenres(user.getGenres().stream().map(g ->
+                        g.getGenre().getType()).toList());
+        dto.setAge(DateConverter.calculateAge(user.getBirthday()));
+
+        return dto;
     }
 }

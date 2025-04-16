@@ -2,6 +2,7 @@ package it.smartworki.dating_app.services;
 
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
+import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.exceptions.alreadyExists.UserAlreadyExistsException;
 import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
@@ -24,9 +25,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public List<UserResponseDTO> findAll() {
+    public List<UserResponseMinimalDTO> findAll() {
         return userRepository.findAll().stream()
-                .map(UserMapper::toDTO)
+                .map(UserMapper::toMinimalDTO)
                 .collect(Collectors.toList());
     }
 
