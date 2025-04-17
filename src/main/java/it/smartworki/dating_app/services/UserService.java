@@ -1,7 +1,9 @@
 package it.smartworki.dating_app.services;
 
+import it.smartworki.dating_app.dtos.UserRegisterDTO;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
+import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.exceptions.alreadyExists.UserAlreadyExistsException;
 import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
@@ -30,9 +32,9 @@ public class UserService {
     @Autowired
     private JWTUtils jwts;
 
-    public List<UserResponseDTO> findAll() {
+    public List<UserResponseMinimalDTO> findAll() {
         return userRepository.findAll().stream()
-                .map(UserMapper::toDTO)
+                .map(UserMapper::toMinimalDTO)
                 .collect(Collectors.toList());
     }
 
@@ -65,36 +67,14 @@ public class UserService {
         return UserMapper.toDTO(userFounded);
     }
 
-    public List<UserResponseDTO> saveAll(List<UserRequestDTO> users) {
-        // Verifica che le email non esistano già
-        List<String> emails = users.stream()
-                .map(UserRequestDTO::getEmail)
-                .collect(Collectors.toList());
+    public UserResponseDTO save(UserRegisterDTO userRegisterDTO) {
+        if (userRepository.existsByEmail(userRegisterDTO.getEmail()))
+            throw new UserAlreadyExistsException(userRegisterDTO.getEmail());
 
-        if (userRepository.existsByEmailIn(emails))
-            throw new UserAlreadyExistsException(emails);
-
-        // Users veri e propri da salvare nel db
-        List<User> newUsers = users.stream()
-                .map(UserMapper::toEntity)
-                .collect(Collectors.toList());
-
-        userRepository.saveAll(newUsers);
-
-        // Mappo gli utenti salvati in UserResponseDTO
-        return newUsers.stream()
-                .map(UserMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    public UserResponseDTO save(UserRequestDTO userRequestDTO) {
-        if (userRepository.existsByEmail(userRequestDTO.getEmail()))
-            throw new UserAlreadyExistsException(userRequestDTO.getEmail());
-
-        User user = UserMapper.toEntity(userRequestDTO);
+        User user = UserMapper.toEntity(userRegisterDTO);
 
         // Codifica della password
-        user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         user.setRegistrationDate(LocalDate.now());
 

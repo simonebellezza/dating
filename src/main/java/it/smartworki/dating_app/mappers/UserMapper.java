@@ -1,12 +1,17 @@
 package it.smartworki.dating_app.mappers;
 
-import it.smartworki.dating_app.dtos.UserRequestDTO;
-import it.smartworki.dating_app.dtos.UserResponseDTO;
+import it.smartworki.dating_app.converters.DateConverter;
+import it.smartworki.dating_app.dtos.*;
+import it.smartworki.dating_app.entities.Genre;
+import it.smartworki.dating_app.entities.GenreUser;
 import it.smartworki.dating_app.entities.User;
+
+import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 public class UserMapper {
     public static UserResponseDTO toDTO(User user) {
-        if(user == null)
+        if (user == null)
             return null;
 
         UserResponseDTO userDTO = new UserResponseDTO();
@@ -18,22 +23,60 @@ public class UserMapper {
         userDTO.setBio(user.getBio());
         userDTO.setAccountType(user.getAccountType());
         userDTO.setRegistrationDate(user.getRegistrationDate());
+        userDTO.setGenres(user.getGenres().stream().map(g ->
+                g.getGenre().getType()).toList());
+        userDTO.setAge(DateConverter.calculateAge(user.getBirthday()));
+        userDTO.setPreferences(PreferenceMapper.toDTO(user.getPreference()));
 
         return userDTO;
     }
 
-    public static User toEntity(UserRequestDTO userRequestDTO) {
-        if(userRequestDTO == null)
+    public static User toEntity(UserRegisterDTO userRegisterDTO) {
+        if (userRegisterDTO == null)
             return null;
 
         User user = new User();
 
-        user.setName(userRequestDTO.getName());
-        user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());  // Hash password
-        user.setBirthday(userRequestDTO.getBirthday());
-        user.setBio(userRequestDTO.getBio());
+        user.setName(userRegisterDTO.getName());
+        user.setEmail(userRegisterDTO.getEmail());
+        user.setPassword(userRegisterDTO.getPassword());
+        user.setBirthday(userRegisterDTO.getBirthday());
+        user.setBio(userRegisterDTO.getBio());
+        user.setRegistrationDate(LocalDate.now());
+        // usare mapper GenreUser per recuperare i generi
 
         return user;
+    }
+
+    public static UserResponseMinimalDTO toMinimalDTO(User user) {
+        if (user == null)
+            return null;
+
+        UserResponseMinimalDTO dto = new UserResponseMinimalDTO();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        // dto.setImagePath(user.getImagePath());
+        dto.setGenres(user.getGenres().stream().map(g ->
+                        g.getGenre().getType()).toList());
+        dto.setAge(DateConverter.calculateAge(user.getBirthday()));
+
+        return dto;
+    }
+
+    public static UserRegisterDTO toUserRegisterDTO(User user) {
+        if (user == null)
+            return null;
+
+        UserRegisterDTO dto = new UserRegisterDTO();
+
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setBirthday(user.getBirthday());
+        dto.setBio(user.getBio());
+        dto.setGenres(user.getGenres().stream().map(g ->
+                g.getGenre().getType())
+                .collect(Collectors.toSet())
+        );
+        return dto;
     }
 }

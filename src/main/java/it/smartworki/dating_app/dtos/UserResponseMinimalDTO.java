@@ -1,6 +1,5 @@
 package it.smartworki.dating_app.dtos;
 
-import it.smartworki.dating_app.entities.Preference;
 import it.smartworki.dating_app.entities.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,16 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserResponseDTO {
+public class UserResponseMinimalDTO {
     private Long id;
     private String name;
-    private String email;
-    private LocalDate birthday;
-    private String bio;
-    private AccountType accountType;
-    private LocalDate registrationDate;
     // private String imagePath;
     private int age;
     private List<String> genres;
-    private UserPreferenceResponseDTO preferences;
 }

@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import it.smartworki.dating_app.dtos.LoginRequestDTO;
+import it.smartworki.dating_app.dtos.UserRegisterDTO;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.security.AuthResponse;
 import it.smartworki.dating_app.security.JWTUtils;
@@ -35,7 +36,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Credenziali non valide")
     })
     @PostMapping("/register")
-    public String register(@Valid @RequestBody UserRequestDTO request) {
+    public String register(@Valid @RequestBody UserRegisterDTO request) {
         userService.save(request);
         return "Registrazione avvenuta con successo!";
     }
