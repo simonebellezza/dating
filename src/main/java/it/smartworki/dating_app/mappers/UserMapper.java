@@ -3,7 +3,6 @@ package it.smartworki.dating_app.mappers;
 import it.smartworki.dating_app.converters.DateConverter;
 import it.smartworki.dating_app.dtos.*;
 import it.smartworki.dating_app.entities.Genre;
-import it.smartworki.dating_app.entities.GenreUser;
 import it.smartworki.dating_app.entities.User;
 
 import java.time.LocalDate;
@@ -23,8 +22,9 @@ public class UserMapper {
         userDTO.setBio(user.getBio());
         userDTO.setAccountType(user.getAccountType());
         userDTO.setRegistrationDate(user.getRegistrationDate());
-        userDTO.setGenres(user.getGenres().stream().map(g ->
-                g.getGenre().getType()).toList());
+        userDTO.setGenres(user.getGenres().stream()
+                .map(Genre::getType)
+                .collect(Collectors.toSet()));
         userDTO.setAge(DateConverter.calculateAge(user.getBirthday()));
         userDTO.setPreferences(PreferenceMapper.toDTO(user.getPreference()));
 
@@ -43,8 +43,6 @@ public class UserMapper {
         user.setBirthday(userRegisterDTO.getBirthday());
         user.setBio(userRegisterDTO.getBio());
         user.setRegistrationDate(LocalDate.now());
-        // usare mapper GenreUser per recuperare i generi
-
         return user;
     }
 
@@ -56,27 +54,23 @@ public class UserMapper {
         dto.setId(user.getId());
         dto.setName(user.getName());
         // dto.setImagePath(user.getImagePath());
-        dto.setGenres(user.getGenres().stream().map(g ->
-                        g.getGenre().getType()).toList());
+        dto.setGenres(user.getGenres().stream().map(Object::toString).collect(Collectors.toSet()));
         dto.setAge(DateConverter.calculateAge(user.getBirthday()));
 
         return dto;
     }
 
-    public static UserRegisterDTO toUserRegisterDTO(User user) {
-        if (user == null)
-            return null;
-
-        UserRegisterDTO dto = new UserRegisterDTO();
-
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setBirthday(user.getBirthday());
-        dto.setBio(user.getBio());
-        dto.setGenres(user.getGenres().stream().map(g ->
-                g.getGenre().getType())
-                .collect(Collectors.toSet())
-        );
-        return dto;
-    }
+//    public static UserRegisterDTO toUserRegisterDTO(User user) {
+//        if (user == null)
+//            return null;
+//
+//        UserRegisterDTO dto = new UserRegisterDTO();
+//
+//        dto.setName(user.getName());
+//        dto.setEmail(user.getEmail());
+//        dto.setBirthday(user.getBirthday());
+//        dto.setBio(user.getBio());
+//        dto.setGenres(user.getGenres().stream().map(Genre::getType).collect(Collectors.toSet()));
+//        return dto;
+//    }
 }

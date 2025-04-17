@@ -19,8 +19,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmailIn(List<String> emails);
 
     // Recuperare bio limitata a 100 caratteri
-
-
-
-
 }

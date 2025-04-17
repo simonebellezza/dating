@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +24,6 @@ public class UserResponseDTO {
     private LocalDate registrationDate;
     // private String imagePath;
     private int age;
-    private List<String> genres;
+    private Set<String> genres;
     private UserPreferenceResponseDTO preferences;
 }

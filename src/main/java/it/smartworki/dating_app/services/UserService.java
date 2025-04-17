@@ -4,33 +4,43 @@ import it.smartworki.dating_app.dtos.UserRegisterDTO;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
+import it.smartworki.dating_app.entities.Genre;
 import it.smartworki.dating_app.entities.User;
 import it.smartworki.dating_app.exceptions.alreadyExists.UserAlreadyExistsException;
 import it.smartworki.dating_app.exceptions.notFound.UserNotFoundException;
 import it.smartworki.dating_app.mappers.UserMapper;
+import it.smartworki.dating_app.repositories.GenreRepository;
 import it.smartworki.dating_app.repositories.UserRepository;
 import it.smartworki.dating_app.security.JWTUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JWTUtils jwts;
+    private final GenreRepository genreRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JWTUtils jwts;
+    public UserService(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            JWTUtils jwts,
+            GenreRepository genreRepository
+    ) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwts = jwts;
+        this.genreRepository = genreRepository;
+    }
 
     public List<UserResponseMinimalDTO> findAll() {
         return userRepository.findAll().stream()
@@ -67,6 +77,7 @@ public class UserService {
         return UserMapper.toDTO(userFounded);
     }
 
+    @Transactional
     public UserResponseDTO save(UserRegisterDTO userRegisterDTO) {
         if (userRepository.existsByEmail(userRegisterDTO.getEmail()))
             throw new UserAlreadyExistsException(userRegisterDTO.getEmail());
@@ -78,7 +89,18 @@ public class UserService {
 
         user.setRegistrationDate(LocalDate.now());
 
-        userRepository.save(user);
+        List<Genre> genres = genreRepository.findByTypeIn(userRegisterDTO.getGenres());
+
+        if (genres.size() != userRegisterDTO.getGenres().size()) {
+            Set<String> found = genres.stream().map(Genre::getType).collect(Collectors.toSet());
+            Set<String> missing = new HashSet<>(userRegisterDTO.getGenres());
+            missing.removeAll(found);
+            throw new IllegalArgumentException("Genere inesistente: " + missing);
+        }
+
+        user.setGenres(new HashSet<>(genres));
+
+        userRepository.saveAndFlush(user);
 
         return UserMapper.toDTO(user);
     }

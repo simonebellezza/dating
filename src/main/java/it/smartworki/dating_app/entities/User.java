@@ -3,6 +3,7 @@ package it.smartworki.dating_app.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.smartworki.dating_app.entities.enums.AccountType;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -56,13 +57,19 @@ public class User {
     @JsonIgnoreProperties("user")
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ManyToMany
     @JsonIgnoreProperties("user")
-    private Set<InterestUser> interests;
+    @JoinTable(name = "interest_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "interest_id"))
+    private Set<Interest> interests;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "genre_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     @JsonIgnoreProperties("user")
-    private Set<GenreUser> genres;
+    private Set<Genre> genres;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
@@ -79,11 +86,4 @@ public class User {
     @OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("userTarget")
     private Set<Match> matchesReceived;
-
-    public User(String name, String email, String password, LocalDate birthday) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.birthday = birthday;
-    }
 }

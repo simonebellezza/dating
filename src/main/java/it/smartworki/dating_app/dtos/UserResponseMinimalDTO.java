@@ -1,13 +1,10 @@
 package it.smartworki.dating_app.dtos;
 
-import it.smartworki.dating_app.entities.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +15,5 @@ public class UserResponseMinimalDTO {
     private String name;
     // private String imagePath;
     private int age;
-    private List<String> genres;
+    private Set<String> genres;
 }

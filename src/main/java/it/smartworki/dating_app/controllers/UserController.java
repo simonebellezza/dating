@@ -6,7 +6,6 @@ import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
 import it.smartworki.dating_app.services.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @Operation(summary = "Find myself")
     @GetMapping("/me")
@@ -53,12 +55,6 @@ public class UserController {
     public UserResponseDTO findById(@PathVariable("id") Long id) {
         return userService.findById(id);
     }
-
-//    @Operation(summary = "Save user")
-//    @PostMapping("/")
-//    public UserResponseDTO save(@RequestBody @Valid UserRequestDTO user) {
-//        return userService.save(user);
-//    }
 
     @Operation(summary = "Update user by ID")
     @PutMapping("/{id}")

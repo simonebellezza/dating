@@ -25,8 +25,7 @@ public class Interest {
 
     // ---------- Relazioni ----------
 
-    // InterestUser 1:N
-    @OneToMany(mappedBy = "interest")
-    @JsonIgnoreProperties("interest")
-    private Set<InterestUser> users;
+    @ManyToMany(mappedBy = "interests")
+    @JsonIgnoreProperties("interests")
+    private Set<User> users;
 }
