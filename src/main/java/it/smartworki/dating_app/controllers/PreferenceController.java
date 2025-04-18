@@ -22,7 +22,8 @@ public class PreferenceController {
             @RequestHeader("Authorization") String headerAuthorization,
             @RequestBody @Valid PreferenceRequestDTO preferenceRequestDTO) {
         String token = headerAuthorization.substring(7);
-        PreferenceResponseDTO updatedPreference = preferenceService.updatePreference(token, preferenceRequestDTO);
+        PreferenceResponseDTO updatedPreference =
+                preferenceService.updatePreference(token, preferenceRequestDTO);
         return ResponseEntity.ok(updatedPreference);
     }
 }

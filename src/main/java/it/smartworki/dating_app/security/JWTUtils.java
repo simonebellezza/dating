@@ -34,8 +34,11 @@ public class JWTUtils {
 				.signWith(key()).compact();
 		return token;
 	}
-	
 
+//	public String getEmail(
+//			new JWTUtils().getUsername(token)
+//	);
+//
 
 	private Key key() {
 		return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
