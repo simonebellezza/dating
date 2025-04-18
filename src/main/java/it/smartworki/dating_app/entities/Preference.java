@@ -44,12 +44,16 @@ public class Preference {
     @JsonIgnoreProperties("preference")
     private User user;
 
-    // GenrePreference 1:N
     @ManyToMany
-    @JoinTable(name = "genre_preference",
-            joinColumns = @JoinColumn(name = "genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "preference_id")
+    @JoinTable(
+            name = "genre_preference",
+            /**
+             * Colonna della tabella Preference
+            */
+            joinColumns = @JoinColumn(name = "preference_id", referencedColumnName = "user_id"),
+            // Colonna della tabella Genre
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id")
     )
-    @JsonIgnoreProperties("preference")
+    @JsonIgnoreProperties("preferences")
     private Set<Genre> genres;
 }

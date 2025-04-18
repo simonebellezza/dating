@@ -1,7 +1,7 @@
 package it.smartworki.dating_app.controllers;
 
-import it.smartworki.dating_app.dtos.PreferenceDTO;
-import it.smartworki.dating_app.entities.Preference;
+import it.smartworki.dating_app.dtos.PreferenceRequestDTO;
+import it.smartworki.dating_app.dtos.PreferenceResponseDTO;
 import it.smartworki.dating_app.services.PreferenceService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,12 @@ public class PreferenceController {
         this.preferenceService = preferenceService;
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<PreferenceDTO> updatePreference(@RequestHeader("Authorization") String headerAuthorization, @RequestBody Preference preference) {
+    @PatchMapping
+    public ResponseEntity<PreferenceResponseDTO> updatePreference(
+            @RequestHeader("Authorization") String headerAuthorization,
+            @RequestBody @Valid PreferenceRequestDTO preferenceRequestDTO) {
         String token = headerAuthorization.substring(7);
-        PreferenceDTO preferenceDTO = preferenceService.updatePreference(token, preference);
-        return ResponseEntity.ok(preferenceDTO);
+        PreferenceResponseDTO updatedPreference = preferenceService.updatePreference(token, preferenceRequestDTO);
+        return ResponseEntity.ok(updatedPreference);
     }
 }

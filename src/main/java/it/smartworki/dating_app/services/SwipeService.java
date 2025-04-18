@@ -19,14 +19,19 @@ import java.util.Optional;
 @Service
 public class SwipeService {
 
-    @Autowired
-    private SwipeRepository swipeRepository;
+    private final SwipeRepository swipeRepository;
+    private final MatchRepository matchRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private MatchRepository matchRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    public SwipeService(
+            SwipeRepository swipeRepository,
+            MatchRepository matchRepository,
+            UserRepository userRepository
+    ) {
+        this.swipeRepository = swipeRepository;
+        this.matchRepository = matchRepository;
+        this.userRepository = userRepository;
+    }
 
     // Definire la transazione
     public void doSwipe(SwipeRequestDTO dto) {

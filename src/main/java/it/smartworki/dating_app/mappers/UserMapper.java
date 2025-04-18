@@ -26,7 +26,7 @@ public class UserMapper {
                 .map(Genre::getType)
                 .collect(Collectors.toSet()));
         userDTO.setAge(DateConverter.calculateAge(user.getBirthday()));
-        userDTO.setPreferences(PreferenceMapper.toUserPreferenceDTO(user.getPreference()));
+        userDTO.setPreferences(PreferenceMapper.toDTO(user.getPreference()));
 
         return userDTO;
     }
@@ -59,18 +59,4 @@ public class UserMapper {
 
         return dto;
     }
-
-//    public static UserRegisterDTO toUserRegisterDTO(User user) {
-//        if (user == null)
-//            return null;
-//
-//        UserRegisterDTO dto = new UserRegisterDTO();
-//
-//        dto.setName(user.getName());
-//        dto.setEmail(user.getEmail());
-//        dto.setBirthday(user.getBirthday());
-//        dto.setBio(user.getBio());
-//        dto.setGenres(user.getGenres().stream().map(Genre::getType).collect(Collectors.toSet()));
-//        return dto;
-//    }
 }

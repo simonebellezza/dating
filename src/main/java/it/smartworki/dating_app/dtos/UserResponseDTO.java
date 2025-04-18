@@ -1,6 +1,5 @@
 package it.smartworki.dating_app.dtos;
 
-import it.smartworki.dating_app.entities.Preference;
 import it.smartworki.dating_app.entities.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +24,5 @@ public class UserResponseDTO {
     // private String imagePath;
     private int age;
     private Set<String> genres;
-    private UserPreferenceResponseDTO preferences;
+    private PreferenceResponseDTO preferences;
 }

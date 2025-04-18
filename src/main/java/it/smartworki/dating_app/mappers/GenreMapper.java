@@ -1,29 +1,27 @@
 package it.smartworki.dating_app.mappers;
 
-import it.smartworki.dating_app.dtos.GenreDTO;
+import it.smartworki.dating_app.dtos.GenreResponseDTO;
 import it.smartworki.dating_app.entities.Genre;
-
-import java.util.stream.Collectors;
 
 public class GenreMapper {
 
-    public static GenreDTO toDTO(Genre genre) {
+    public static GenreResponseDTO toDTO(Genre genre) {
         if (genre == null) {
             return null;
         }
-        GenreDTO genreDTO = new GenreDTO();
-        genreDTO.setId(genre.getId());
-        genreDTO.setType(genre.getType());
-        return genreDTO;
+        GenreResponseDTO genreResponseDTO = new GenreResponseDTO();
+        genreResponseDTO.setId(genre.getId());
+        genreResponseDTO.setType(genre.getType());
+        return genreResponseDTO;
     }
 
-//    public static Genre toEntity(GenreDTO genreDTO) {
-//        if (genreDTO == null) {
-//            return null;
-//        }
-//        Genre genre = new Genre();
-//        genre.setId(genreDTO.getId());
-//        genre.setType(genreDTO.getType());
-//        return genre;
-//    }
+    public static Genre toEntity(GenreResponseDTO genreResponseDTO) {
+        if (genreResponseDTO == null) {
+            return null;
+        }
+        Genre genre = new Genre();
+        genre.setId(genreResponseDTO.getId());
+        genre.setType(genreResponseDTO.getType());
+        return genre;
+    }
 }
