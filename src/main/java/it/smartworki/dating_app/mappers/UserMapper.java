@@ -26,7 +26,7 @@ public class UserMapper {
                 .map(Genre::getType)
                 .collect(Collectors.toSet()));
         userDTO.setAge(DateConverter.calculateAge(user.getBirthday()));
-        userDTO.setPreferences(PreferenceMapper.toDTO(user.getPreference()));
+        userDTO.setPreferences(PreferenceMapper.toUserPreferenceDTO(user.getPreference()));
 
         return userDTO;
     }
