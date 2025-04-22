@@ -1,15 +1,6 @@
 [
   {
-    "email": "francesca.neri@example.com",
-    "password": "password654"
-  },
-  {
-    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmcmFuY2VzY29AbW9kdWduby5pdCIsImlhdCI6MTc0NDg4NzY3MiwiZXhwIjoxNzQ1NDkyNDcyfQ.N4vCXO5F6eYgC4uKIuwVSlEYbrfAs7M5XXi8SJTnegRACpfLUF4JeBW8aQETvFvu",
-    "email": "francesco@modugno.it",
-    "tokenType": "Bearer"
-  },
-  {
-    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmcmFuY2VzY29yb3NhcmlvbWFyaWFhbnRvbmlvQG1vZHVnbm8uaXQiLCJpYXQiOjE3NDQ5NzU5MDAsImV4cCI6MTc0NTU4MDcwMH0.nLllKBAnLMLL0IokzUOfokRFyRhezUq1xFtUFMFfSPOtkwv6yZll5ezgjaDibfKE",
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmcmFuY2VzY29yb3NhcmlvbWFyaWFhbnRvbmlvQG1vZHVnbm8uaXQiLCJpYXQiOjE3NDUzMTI4NzcsImV4cCI6MTc0NTkxNzY3N30.ieRxdx8p1Z-5Yo0CDKtDjUM14sWHXMi854KXAGKJK8z6I_w6c8AKVJXJ1gY4OJmb",
     "email": "francescorosariomariaantonio@modugno.it",
     "tokenType": "Bearer"
   }

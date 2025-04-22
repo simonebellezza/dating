@@ -13,6 +13,7 @@ import it.smartworki.dating_app.repositories.GenreRepository;
 import it.smartworki.dating_app.repositories.UserRepository;
 import it.smartworki.dating_app.security.JWTUtils;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -143,4 +144,15 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    @Transactional
+    public void saveDeviceToken(String jwt, String deviceToken) {
+        String email = jwts.getUsername(jwt);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+
+        user.setDeviceToken(deviceToken);
+        userRepository.save(user);
+    }
+
 }

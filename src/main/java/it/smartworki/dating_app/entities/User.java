@@ -43,6 +43,10 @@ public class User {
     @Column(name = "registration_date")
     private LocalDate registrationDate = LocalDate.now();
 
+    @Column(name = "device_token")
+    private String deviceToken;
+
+
     // ---------- Relazioni ----------
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

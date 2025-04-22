@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
+import it.smartworki.dating_app.fcm.DeviceTokenRequestDTO;
 import it.smartworki.dating_app.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -68,4 +69,16 @@ public class UserController {
     public void deleteById(@PathVariable("id") Long id) {
         userService.delete(id);
     }
+
+    @Operation(summary = "Salva il deviceToken dell’utente autenticato")
+    @PostMapping("/device-token")
+    public ResponseEntity<Void> saveDeviceToken(
+            @RequestHeader("Authorization") String authHeader,
+            @RequestBody @Valid DeviceTokenRequestDTO dto
+    ) {
+        String token = authHeader.replace("Bearer ", "");
+        userService.saveDeviceToken(token, dto.deviceToken());
+        return ResponseEntity.ok().build();
+    }
+
 }
