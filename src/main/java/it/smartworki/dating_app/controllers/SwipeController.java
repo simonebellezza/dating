@@ -1,7 +1,6 @@
 package it.smartworki.dating_app.controllers;
 
 import it.smartworki.dating_app.dtos.SwipeDTO;
-import it.smartworki.dating_app.entities.Swipe;
 import it.smartworki.dating_app.services.SwipeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
