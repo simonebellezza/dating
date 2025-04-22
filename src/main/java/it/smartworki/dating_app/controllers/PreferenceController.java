@@ -5,6 +5,7 @@ import it.smartworki.dating_app.dtos.PreferenceResponseDTO;
 import it.smartworki.dating_app.services.PreferenceService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,11 +20,10 @@ public class PreferenceController {
 
     @PatchMapping
     public ResponseEntity<PreferenceResponseDTO> updatePreference(
-            @RequestHeader("Authorization") String headerAuthorization,
             @RequestBody @Valid PreferenceRequestDTO preferenceRequestDTO) {
-        String token = headerAuthorization.substring(7);
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
         PreferenceResponseDTO updatedPreference =
-                preferenceService.updatePreference(token, preferenceRequestDTO);
+                preferenceService.updatePreference(email, preferenceRequestDTO);
         return ResponseEntity.ok(updatedPreference);
     }
 }

@@ -40,8 +40,7 @@ public class SwipeService {
         this.jwt = jwt;
     }
 
-    public Set<SwipeDTO> getAllSwipes(String token) {
-        String email = jwt.getUsername(token);
+    public Set<SwipeDTO> getAllSwipes(String email) {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));

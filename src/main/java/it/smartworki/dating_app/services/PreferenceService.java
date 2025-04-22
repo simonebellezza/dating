@@ -37,10 +37,9 @@ public class PreferenceService {
     }
 
     public PreferenceResponseDTO updatePreference(
-            String token,
+            String email,
             PreferenceRequestDTO preferenceRequestDTO
     ) {
-        String email = jwt.getUsername(token);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
