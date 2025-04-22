@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import it.smartworki.dating_app.dtos.UserRequestDTO;
 import it.smartworki.dating_app.dtos.UserResponseDTO;
 import it.smartworki.dating_app.dtos.UserResponseMinimalDTO;
-import it.smartworki.dating_app.fcm.DeviceTokenRequestDTO;
+import it.smartworki.dating_app.dtos.DeviceTokenRequestDTO;
 import it.smartworki.dating_app.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -77,8 +77,7 @@ public class UserController {
             @RequestBody @Valid DeviceTokenRequestDTO dto
     ) {
         String token = authHeader.replace("Bearer ", "");
-        userService.saveDeviceToken(token, dto.deviceToken());
+        userService.saveDeviceToken(token, dto.fmcToken());
         return ResponseEntity.ok().build();
     }
-
 }

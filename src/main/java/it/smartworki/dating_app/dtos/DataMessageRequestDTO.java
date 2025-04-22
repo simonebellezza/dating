@@ -1,4 +1,4 @@
-package it.smartworki.dating_app.fcm;
+package it.smartworki.dating_app.dtos;
 
 import java.util.Map;
 

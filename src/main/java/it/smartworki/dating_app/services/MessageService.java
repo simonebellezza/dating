@@ -22,7 +22,7 @@ public class MessageService {
     }
 
     @Transactional
-    public void sendMessage(User sender, User receiver, String content) {
+    public Message sendMessage(User sender, User receiver, String content) {
         Message message = new Message();
         message.setSender(sender);
         message.setReceiver(receiver);
@@ -32,12 +32,6 @@ public class MessageService {
         message.setStatus("sent");
 
         messageRepository.save(message);
-
-        firebaseMessagingService.sendNotification(
-                receiver.getDeviceToken(),
-                "Nuovo messaggio",
-                content
-        );
+        return message;
     }
-
 }

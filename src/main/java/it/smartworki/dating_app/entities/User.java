@@ -43,9 +43,8 @@ public class User {
     @Column(name = "registration_date")
     private LocalDate registrationDate = LocalDate.now();
 
-    @Column(name = "device_token")
-    private String deviceToken;
-
+    @Column(name = "fcm_token")
+    private String fcmToken;
 
     // ---------- Relazioni ----------
 
@@ -90,4 +89,13 @@ public class User {
     @OneToMany(mappedBy = "userTarget", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("userTarget")
     private Set<Match> matchesReceived;
+
+    @OneToMany(mappedBy = "sender")
+    @JsonIgnoreProperties("sender")
+    private Set<Message> sentMessages;
+
+    @OneToMany(mappedBy = "receiver")
+    @JsonIgnoreProperties("receiver")
+    private Set<Message> receivedMessages;
+
 }

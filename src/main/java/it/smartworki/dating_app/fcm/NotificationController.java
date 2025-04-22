@@ -1,5 +1,6 @@
 package it.smartworki.dating_app.fcm;
 
+import it.smartworki.dating_app.dtos.DataMessageRequestDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

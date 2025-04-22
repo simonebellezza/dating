@@ -49,6 +49,12 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+    }
+
+
     public UserResponseDTO findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return UserMapper.toDTO(user);
@@ -151,9 +157,10 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
 
-        user.setDeviceToken(deviceToken);
+        user.setFcmToken(deviceToken);
         userRepository.save(user);
     }
+
 
     public User findEntityByToken(String jwt) {
         String email = jwts.getUsername(jwt);
