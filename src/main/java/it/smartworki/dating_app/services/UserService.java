@@ -155,4 +155,16 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public User findEntityByToken(String jwt) {
+        String email = jwts.getUsername(jwt);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+
+        return user;
+    }
+
+    public User findEntityById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+    }
 }

@@ -26,4 +26,3 @@ firebase:
   config:
     path:
       privateKey: "scripts/fcm/firebase-pvt-key.json"
-      google: "scripts/fcm/google-services.json"
