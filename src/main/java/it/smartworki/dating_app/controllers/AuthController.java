@@ -21,14 +21,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JWTUtils jwtUtils;
-
-    @Autowired
     private UserService userService;
+
+    public AuthController(AuthenticationManager authenticationManager, JWTUtils jwtUtils, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.userService = userService;
+    }
 
     @Operation(summary = "Registrazione utente")
     @ApiResponses(value = {

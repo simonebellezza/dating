@@ -1,6 +1,8 @@
-package it.smartworki.dating_app.fcm;
+package it.smartworki.dating_app.controllers;
 
 import it.smartworki.dating_app.dtos.DataMessageRequestDTO;
+import it.smartworki.dating_app.fcm.FirebaseMessagingService;
+import it.smartworki.dating_app.fcm.NotificationRequestDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -54,7 +54,6 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
     }
 
-
     public UserResponseDTO findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return UserMapper.toDTO(user);
@@ -160,7 +159,6 @@ public class UserService {
         user.setFcmToken(deviceToken);
         userRepository.save(user);
     }
-
 
     public User findEntityByToken(String jwt) {
         String email = jwts.getUsername(jwt);

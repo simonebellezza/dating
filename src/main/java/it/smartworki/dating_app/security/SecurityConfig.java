@@ -48,10 +48,10 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers("/api/swipes/**").permitAll()
-                .requestMatchers("/v3/api-docs/**").permitAll() // Permetti l'accesso a /v3/api-docs/**
+                .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                .anyRequest().authenticated())
-        .exceptionHandling( exception -> exception
+                .anyRequest().authenticated()
+        ).exceptionHandling( exception -> exception
                 .authenticationEntryPoint(authenticationEntryPoint)
         ).sessionManagement( session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
