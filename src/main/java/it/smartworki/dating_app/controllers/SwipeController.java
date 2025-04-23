@@ -4,6 +4,7 @@ import it.smartworki.dating_app.dtos.SwipeDTO;
 import it.smartworki.dating_app.services.SwipeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -20,10 +21,9 @@ public class SwipeController {
 
     @GetMapping
     public ResponseEntity<Set<SwipeDTO>> getAllSwipes(
-            @RequestHeader(name = "Authorization") String headerAuthorization
     ) {
-        String token = headerAuthorization.substring(7);
-        Set<SwipeDTO> swipes = swipeService.getAllSwipes(token);
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Set<SwipeDTO> swipes = swipeService.getAllSwipes(email);
         return ResponseEntity.ok(swipes);
     }
 

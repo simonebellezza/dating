@@ -59,18 +59,16 @@ public class UserService {
         return UserMapper.toDTO(user);
     }
 
-    public UserResponseDTO findMe(String token){
-        String email = jwts.getUsername(token);
+    public UserResponseDTO findMe(String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));;
                 return UserMapper.toDTO(user);
     }
 
-    public UserResponseDTO findByToken(String token, long id) {
+    public UserResponseDTO findByToken(String email, long id) {
         User userFounded = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
 
-        String email = jwts.getUsername(token);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
 

@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "matches", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "user_target_id"})
-
 })
 @NoArgsConstructor
 @AllArgsConstructor

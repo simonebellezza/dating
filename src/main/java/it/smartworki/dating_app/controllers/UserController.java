@@ -9,6 +9,7 @@ import it.smartworki.dating_app.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,24 +20,23 @@ public class UserController {
 
 
     private final UserService userService;
-
     private UserController(UserService userService) {
         this.userService = userService;
     }
 
     @Operation(summary = "Find myself")
     @GetMapping("/me")
-    public ResponseEntity<UserResponseDTO> findMe(@RequestHeader("Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        UserResponseDTO user = userService.findMe(token);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserResponseDTO> findMe(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserResponseDTO userResponseDTO = userService.findMe(email);
+        return ResponseEntity.ok(userResponseDTO);
     }
 
     @Operation(summary = "Find user by token or redirect to /me")
     @GetMapping("/user/{id}")
-    public ResponseEntity<?> findByToken(@RequestHeader("Authorization") String authorizationHeader, @PathVariable long id) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        UserResponseDTO user = userService.findByToken(token, id);
+    public ResponseEntity<?> findByToken(@PathVariable long id) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserResponseDTO user = userService.findByToken(email, id);
 
         // Se l'utente autenticato corrisponde all'utente richiesto, reindirizza a /me
         if (user.getId() == id) {
