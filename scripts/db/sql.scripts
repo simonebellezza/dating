@@ -1,0 +1,16 @@
+use dating_app;
+
+show tables;
+
+desc genres;
+desc genre_user;
+desc interest_user;
+desc interests;
+desc matches;
+desc preferences;
+desc roles;
+desc swipes;
+desc users;
+desc user_details;
+
+

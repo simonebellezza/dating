@@ -1,0 +1,33 @@
+// Risposta: PreferenceDTO
+{
+  "minAge": 18,
+  "maxAge": 22,
+  "distance": 100,
+  "genres": [ // Risposta: GenreResponseDTO
+    {
+      "id": 1,
+      "type": "Male"
+    },
+    {
+      "id": 2,
+      "type": "Female"
+    },
+    {
+      "id": 3,
+      "type": "Non_binary"
+    },
+    {
+      "id": 4,
+      "type": "Queer"
+    }
+  ]
+}
+
+
+// Risposta: PreferenceDTO
+{
+    "minAge": 18,
+    "maxAge": 22,
+    "distance": 100,
+    "genres": [3,4] // Richiesta: GenreResponseDTO
+}

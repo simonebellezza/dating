@@ -1,0 +1,23 @@
+[
+
+  {
+    "email": "test@sender.com",
+    "password": "test1234"
+  },
+  {
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHNlbmRlci5jb20iLCJpYXQiOjE3NDU0MDEzMjcsImV4cCI6MTgwNTg4MTMyN30.QLDJdF_xr41QnYzabbqW7Ej6YhCDqG-2mwNSBNGtvtKpQplKyVivJCTFfeTHu2x2",
+    "email": "test@sender.com",
+    "tokenType": "Bearer"
+  },
+
+
+  {
+    "password": "receive123",
+    "email": "receive@test.it"
+  },
+  {
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyZWNlaXZlQHRlc3QuaXQiLCJpYXQiOjE3NDU0MDEwODAsImV4cCI6MTgwNTg4MTA4MH0.S_wxQKh2kbdzaVtZ8ncv2n5T8f24KaDy3ZLzDw020tHg0E6RdNVFN3HPcs5mUA0Q",
+    "email": "receive@test.it",
+    "tokenType": "Bearer"
+  }
+]

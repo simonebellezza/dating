@@ -1,0 +1,200 @@
+[
+  {
+    "name": "Mario Rossi",
+    "email": "mario.rossi@example.com",
+    "password": "password123",
+    "birthday": "1990-05-15"
+  },
+  {
+    "name": "Luisa Bianchi",
+    "email": "luisa.bianchi@example.com",
+    "password": "securePass456",
+    "birthday": "1985-08-22"
+  },
+  {
+    "name": "Giovanni Verdi",
+    "email": "giovanni.verdi@example.com",
+    "password": "myPassword789",
+    "birthday": "1992-11-30"
+  },
+  {
+    "name": "Anna Neri",
+    "email": "anna.neri@example.com",
+    "password": "passWord321",
+    "birthday": "1995-03-10"
+  },
+  {
+    "name": "Paolo Gialli",
+    "email": "paolo.gialli@example.com",
+    "password": "yellowPass654",
+    "birthday": "1988-07-25"
+  },
+  {
+    "name": "Mario Rossi",
+    "password": "Password123!",
+    "email": "rossi.mario@example.com",
+    "birthday": "1980-01-01",
+    "bio": "Appassionato di tecnologia e sport",
+    "accountType": "STANDARD",
+    "registrationDate": "2025-01-01"
+  },
+  {
+    "name": "Mario Rossi",
+    "email": "mario.rossi@example.com",
+    "password": "password123",
+    "birthday": "1990-05-15"
+  },
+  {
+    "name": "Luisa Bianchi",
+    "email": "luisa.bianchi@example.com",
+    "password": "securePass456",
+    "birthday": "1985-08-22"
+  },
+  {
+    "name": "Giovanni Verdi",
+    "email": "giovanni.verdi@example.com",
+    "password": "myPassword789",
+    "birthday": "1992-11-30"
+  },
+  {
+    "name": "Anna Neri",
+    "email": "anna.neri@example.com",
+    "password": "passWord321",
+    "birthday": "1995-03-10"
+  },
+  {
+    "name": "Paolo Gialli",
+    "email": "paolo.gialli@example.com",
+    "password": "yellowPass654",
+    "birthday": "1988-07-25"
+  },
+  {
+    "name": "Mario Rossi",
+    "password": "Password123!",
+    "email": "mario.rossi@example.com",
+    "birthday": "1980-01-01",
+    "bio": "Appassionato di tecnologia e sport",
+    "accountType": "STANDARD",
+    "registrationDate": "2025-01-01"
+  },
+  {
+    "name": "User 1",
+    "email": "user1@example.com",
+    "password": "password1",
+    "birthday": "1990-01-01"
+  },
+  {
+    "name": "User 2",
+    "email": "user2@example.com",
+    "password": "password2",
+    "birthday": "1991-02-02"
+  },
+  {
+    "name": "User 3",
+    "email": "user3@example.com",
+    "password": "password3",
+    "birthday": "1992-03-03"
+  },
+  {
+    "name": "User 4",
+    "email": "user4@example.com",
+    "password": "password4",
+    "birthday": "1993-04-04"
+  },
+  {
+    "name": "User 5",
+    "email": "user5@example.com",
+    "password": "password5",
+    "birthday": "1994-05-05"
+  },
+  {
+    "name": "User 6",
+    "email": "user6@example.com",
+    "password": "password6",
+    "birthday": "1995-06-06"
+  },
+  {
+    "name": "User 7",
+    "email": "user7@example.com",
+    "password": "password7",
+    "birthday": "1996-07-07"
+  },
+  {
+    "name": "User 8",
+    "email": "user8@example.com",
+    "password": "password8",
+    "birthday": "1997-08-08"
+  },
+  {
+    "name": "User 9",
+    "email": "user9@example.com",
+    "password": "password9",
+    "birthday": "1998-09-09"
+  },
+  {
+    "name": "User 10",
+    "email": "user10@example.com",
+    "password": "password10",
+    "birthday": "1999-10-10"
+  },
+  {
+    "name": "User 11",
+    "email": "user11@example.com",
+    "password": "password11",
+    "birthday": "2000-11-11"
+  },
+  {
+    "name": "User 12",
+    "email": "user12@example.com",
+    "password": "password12",
+    "birthday": "2001-12-12"
+  },
+  {
+    "name": "User 13",
+    "email": "user13@example.com",
+    "password": "password13",
+    "birthday": "1980-01-13"
+  },
+  {
+    "name": "User 14",
+    "email": "user14@example.com",
+    "password": "password14",
+    "birthday": "1981-02-14"
+  },
+  {
+    "name": "User 15",
+    "email": "user15@example.com",
+    "password": "password15",
+    "birthday": "1982-03-15"
+  },
+  {
+    "name": "User 16",
+    "email": "user16@example.com",
+    "password": "password16",
+    "birthday": "1983-04-16"
+  },
+  {
+    "name": "User 17",
+    "email": "user17@example.com",
+    "password": "password17",
+    "birthday": "1984-05-17"
+  },
+  {
+    "name": "User 18",
+    "email": "user18@example.com",
+    "password": "password18",
+    "birthday": "1985-06-18"
+  },
+  {
+    "name": "User 19",
+    "email": "user19@example.com",
+    "password": "password19",
+    "birthday": "1986-07-19"
+  },
+  {
+    "name": "User 20",
+    "email": "user20@example.com",
+    "password": "password20",
+    "birthday": "1987-08-20"
+  }
+]
