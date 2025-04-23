@@ -26,7 +26,7 @@ public class MessageController {
         this.userService = userService;
     }
 
-    @PostMapping("/send")
+    @PostMapping
     public ResponseEntity<MessageResponseDTO> sendMessage(
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestBody SendMessageRequestDTO request

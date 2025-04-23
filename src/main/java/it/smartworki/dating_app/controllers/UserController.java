@@ -19,13 +19,14 @@ public class UserController {
 
 
     private final UserService userService;
+
     private UserController(UserService userService) {
         this.userService = userService;
     }
 
     @Operation(summary = "Find myself")
     @GetMapping("/me")
-    public ResponseEntity<UserResponseDTO> findMe(@RequestHeader("Authorization") String authorizationHeader){
+    public ResponseEntity<UserResponseDTO> findMe(@RequestHeader("Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         UserResponseDTO user = userService.findMe(token);
         return ResponseEntity.ok(user);
@@ -50,7 +51,9 @@ public class UserController {
 
     @Operation(summary = "Find all users")
     @GetMapping("/")
-    public List<UserResponseMinimalDTO> findAll() { return userService.findAll(); }
+    public List<UserResponseMinimalDTO> findAll() {
+        return userService.findAll();
+    }
 
     @Operation(summary = "Find user by ID")
     @GetMapping("/{id}")
@@ -77,6 +80,12 @@ public class UserController {
             @RequestBody @Valid DeviceTokenRequestDTO dto
     ) {
         String token = authHeader.replace("Bearer ", "");
+        System.out.println("JWT Token from request: " + token);
+        String deviceToken = dto.fmcToken();
+
+
+
+        System.out.println("Token FCM ricevuto: " + deviceToken);
         userService.saveDeviceToken(token, dto.fmcToken());
         return ResponseEntity.ok().build();
     }

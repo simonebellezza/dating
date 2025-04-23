@@ -1,0 +1,12 @@
+{
+  "name": "Tester",
+  "password": "testtest",
+  "email": "test@test.it",
+  "birthday": "1975-04-15",
+  "bio": "Sono un tester",
+  "genres": [
+    "Male",
+    "Queer",
+    "Non_binary"
+  ]
+}
