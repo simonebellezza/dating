@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-
     private final UserService userService;
     private UserController(UserService userService) {
         this.userService = userService;
@@ -82,8 +81,6 @@ public class UserController {
         String token = authHeader.replace("Bearer ", "");
         System.out.println("JWT Token from request: " + token);
         String deviceToken = dto.fmcToken();
-
-
 
         System.out.println("Token FCM ricevuto: " + deviceToken);
         userService.saveDeviceToken(token, dto.fmcToken());

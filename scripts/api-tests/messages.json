@@ -1,6 +1,10 @@
 [
   {
+    "receiverId": 7,
+    "content": "Saluti da utente con id 7"
+  },
+  {
     "receiverId": 6,
-    "content": "Saluti dall'utente 1"
+    "content": "L'utente con id 6 ringrazia l'utente con id 7 e ricambia"
   }
 ]

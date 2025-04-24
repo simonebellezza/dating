@@ -19,5 +19,15 @@
     "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyZWNlaXZlQHRlc3QuaXQiLCJpYXQiOjE3NDU0MDEwODAsImV4cCI6MTgwNTg4MTA4MH0.S_wxQKh2kbdzaVtZ8ncv2n5T8f24KaDy3ZLzDw020tHg0E6RdNVFN3HPcs5mUA0Q",
     "email": "receive@test.it",
     "tokenType": "Bearer"
+  },
+
+  {
+    "password": "receive123",
+    "email": "receive@test2.it"
+  },
+  {
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyZWNlaXZlQHRlc3QyLml0IiwiaWF0IjoxNzQ1NTAzODY2LCJleHAiOjE4MDU5ODM4NjZ9.AbVwWymkRDCXsnuiw48pmSdDH7ITiLjDUAiFgkRMe0gE1mO5ICEBWw33DwDQlVvl",
+    "email": "receive@test2.it",
+    "tokenType": "Bearer"
   }
 ]
